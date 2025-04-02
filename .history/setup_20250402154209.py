@@ -2,25 +2,29 @@ from setuptools import setup, find_packages
 
 setup(
     name="neri_library",
-    version="0.2.6",
+    version="0.2.2",
     author="Guilherme Neri",
-    author_email="guilherme.neri@bcfox.com.br",
-    description="Biblioteca BCFOX",
+    author_email="gui.neriaz@gmail.com ",
+    description="Neri Library",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/NeriAzv/Neri-Library",
     packages=find_packages(),
     entry_points={
         "console_scripts": [
-            *[f"{cmd}=neri_library.cli:main" for cmd in [
-                "neri_library",
-                "nerilibrary",
-                "neri-lib",
-                "nerilib",
-                "library",
-                "nlib",
-                "neri",
-                "nl",
+            *[f"{cmd}=bcpkgfox.cli:main" for cmd in [
+                "bcpkgfox",
+                "bpckgofx",
+                "bcpkffox",
+                "bcpkhfox",
+                "bcpkfox",
+                "pkgfox",
+                "bcfox",
+                "bcpkg",
+                "bpkg",
+                "pkg",
+                "fox",
+                "bc",
             ]],
         ]
     },
@@ -34,36 +38,23 @@ setup(
         'setuptools',
         'pyperclip',
         'pyinstaller',
-        'selenium',
+        'selenium'
     ],
     extras_require={
-        "pynput": [
-            'pynput',
-        ],
-        "screeninfo": [
-            'screeninfo',
-        ],
-        "pywinauto": [
-            'pywinauto',
-        ],
-        "capmonstercloudclient":[
-            'capmonstercloudclient',
-        ],
         "full": [
             'undetected-chromedriver',
             'webdriver-manager',
             'opencv-python',
             'pygetwindow',
             'pyinstaller',
-            'screeninfo',
             'pyscreeze',
             'pyautogui',
             'selenium',
             'requests',
             'pymupdf',
             'Pillow',
-            'psutil',
-            'pynput',
+            'psutil'
         ],
+
     },
 )

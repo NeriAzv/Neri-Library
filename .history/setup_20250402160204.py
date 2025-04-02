@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="neri_library",
-    version="0.2.6",
+    name="Neri_library",
+    version="0.2.5",
     author="Guilherme Neri",
     author_email="guilherme.neri@bcfox.com.br",
     description="Biblioteca BCFOX",
@@ -17,9 +17,9 @@ setup(
                 "nerilibrary",
                 "neri-lib",
                 "nerilib",
-                "library",
                 "nlib",
                 "neri",
+                "library",
                 "nl",
             ]],
         ]

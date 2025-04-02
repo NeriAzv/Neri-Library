@@ -1,8 +1,9 @@
 [console_scripts]
-fi = neri_library.cli:main
-find_import = neri_library.cli:main
-find_imports = neri_library.cli:main
-nfi = neri_library.cli:main
-nr-find-imports = neri_library.cli:main
-nr_find_import = neri_library.cli:main
-nr_find_imports = neri_library.cli:main
+library = neri_library.cli:main
+neri = neri_library.cli:main
+neri-lib = neri_library.cli:main
+neri_library = neri_library.cli:main
+nerilib = neri_library.cli:main
+nerilibrary = neri_library.cli:main
+nl = neri_library.cli:main
+nlib = neri_library.cli:main

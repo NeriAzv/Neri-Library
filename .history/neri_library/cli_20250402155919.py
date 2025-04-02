@@ -388,7 +388,7 @@ class cli:
             self.imports = list(set(self.imports))
             import pyperclip
 
-            from neri_library import DK_ORANGE, ORANGE, RESET
+            from bcpkgfox import DK_ORANGE, ORANGE, RESET
             if self.imports:
                 if not return_:
                     pyperclip.copy(f"pip install {' '.join(self.imports)}")
@@ -399,7 +399,7 @@ class cli:
                     num_lines = math.floor(len(text) / terminal_width)
 
                     try: self.animate_rgb_text(text, delay=0.002)
-                    except KeyboardInterrupt: print(f"\033[{num_lines}A\033[0J {DK_ORANGE}--->{RESET} {ORANGE}pip install {' '.join(self.imports)}{RESET}                   \n\n {DK_ORANGE}>{RESET} Copiado para sua área de transferencia. \n(obs: só identifica as libs que são pertencentes da bibliotca neri_library) \n")
+                    except KeyboardInterrupt: print(f"\033[{num_lines}A\033[0J {DK_ORANGE}--->{RESET} {ORANGE}pip install {' '.join(self.imports)}{RESET}                   \n\n {DK_ORANGE}>{RESET} Copiado para sua área de transferencia. \n(obs: só identifica as libs que são pertencentes da bibliotca bcfox) \n")
                 else: return self.imports
             else: print("No libraries from the list were found in the script.")
 

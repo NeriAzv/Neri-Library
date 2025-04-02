@@ -1,14 +1,14 @@
 """
-**_NERI_LIBRARY - DOC_**
+**_LIB NERI - DOC_**
 
 Args:
-    *DRIVER*: To use the driver service, initialize its class as in the example below. All explanations of the options are there.
+    *DRIVER*: Para utitlizar o servico do _driver_ inicie a classe dele como no exemplo abaixo, todas as explicações das opções estão lá.
         - driver_class = neri_library.Instancedriver()
 
-    _SYSTEM_: If you want to extract PDFs, create folders, display message boxes, among other system services, use the command below **directly**.
+    _SYSTEM_: Caso queira extrair PDF's, criar pastas, mostrar mensagens_box entre outros serviços do systema utilize o comando abaixo **diretamente**.
         - neri_library.System.{def}
 
-    _API_: To use APIs, use the command below, **directly**
+    _API_: Utilização de api's use o comando abaixo, **diretamente**
         - neri_library.invoke_api.{def}
 
 """
@@ -95,20 +95,6 @@ def create_dirs(specifics_dirs: Optional[list] = None, disable_print_response: b
 
         else:
             print(f" {DK_ORANGE}>{RESET} Todos os diretórios padrões presentes")
-
-def resource_path(relative_path):
-    """
-    Returns the absolute path of a resource, whether running normally or in a PyInstaller executable.
-
-    Args:
-        relative_path (str): Relative path of the resource.
-
-    Returns:
-        str: Absolute path of the resource.
-    """
-    try: base_path = sys._MEIPASS
-    except AttributeError: base_path = os.path.abspath(".")
-    return os.path.join(base_path, relative_path)
 
 def initialize_driver(extension_path: Optional[str] = None, captcha_name: Optional[str] = None, captcha_api_key: Optional[str] = None) -> WebElement:
 
@@ -225,21 +211,22 @@ def wait_for_element_disappear(object, type, timeout=10):
 
     return find_elements.backcode__dont_use__wait_for_d(driver, object, type, timeout=tempo)
 
-def nr_select(element, method, key):
+def select_element(elemento, method, key):
     """
-    Selects an option in a <select> element.
+    Seleciona uma opção em um elemento <select>.
 
-    Args:
-        element: The <select> element found by Selenium.
-        method: Selection method ('index', 'text', or 'value').
-        key: Value used for selection (index, visible text, or 'value' attribute).
+    - Parâmetros:
+        - elemento: Elemento <select> encontrado pelo Selenium.
+        - method: Método de seleção ('index', 'text' ou 'value').
+        - key: Valor usado na seleção (índice, texto visível ou valor do atributo 'value').
 
-    Example:
-        select_element = neri_library.find_element_with_wait("xpath", '//select[@value="FIRST_SELECT_VALUE"]')
+    - Exemplo:
+        elemento_select = nc.find_element_with_wait("xpath", '//select[@value="VALUE_DO_PRIMEIRO_SELECT"]')
 
-        first_option = nr_select(select_element, "text", "FIRST SELECT TEXT")
-        first_option = nr_select(select_element, "value", "FIRST_SELECT_VALUE")
-        first_option = nr_select(select_element, "index", "0")
+        primeira_option = select_element(elemento_select, "text", "TEXTO DO PRIMEIRO SELECT")
+        primeira_option = select_element(elemento_select, "value", "VALUE_DO_PRIMEIRO_SELECT")
+        primeira_option = select_element(elemento_select, "index", "0")
+
     """
 
     variations = {
@@ -256,26 +243,21 @@ def nr_select(element, method, key):
     else:
         raise ValueError(f"Método '{method}' não é válido. Escolha entre 'index', 'text' ou 'value'.")
 
-    select = Select(element)
+    select = Select(elemento)
     if method == "value":
         select.select_by_value(key)
 
     if method == "text":
-        elements = WebDriverWait(element, 10).until(EC.visibility_of_all_elements_located((By.XPATH, '//option')))
-        for elm in elements:
-            if key.lower().strip() in elm.text.lower().strip():
-                select.select_by_visible_text(elm.text)
-                return
-        raise ModuleNotFoundError(f"Option {key} não encontrada")
+        select.select_by_visible_text(key)
 
     if method == "index":
         select.select_by_index(key)
 
-def pop_up_extract(text: bool = False, accept: bool = False, timeout: int = 10, driver_instance: Optional[WebElement] = None):
+def pop_up_extract(text: bool = False, accept: bool = False, timeout: int = 10):
     """ Identifica um pop-up simples extraindo o texto e aceitando ele também. \n
 
     - Como usar:
-        Chame a função e registrando ela em uma variável, and if you iniciate a driver without the library pass the driver variable.
+        Chame a função e registrando ela em uma variável
 
     - Exemplo:
         text = nr.pop_up_extract(text:True, accept:True, timeout=5)
@@ -285,14 +267,13 @@ def pop_up_extract(text: bool = False, accept: bool = False, timeout: int = 10, 
     global driver
     extract_text = None
 
-    if not driver_instance: driver_instance = driver
     if timeout == 0:
         timeout = float("inf")
 
     attempts = 0
     while attempts < timeout:
         try:
-            jan = driver_instance.switch_to.alert
+            jan = driver.switch_to.alert
 
             if text == True:
                 extract_text = jan.text
@@ -304,13 +285,11 @@ def pop_up_extract(text: bool = False, accept: bool = False, timeout: int = 10, 
                 return extract_text
             return
 
-        except Exception as e:
-            last_exception = e
-            print(e)
+        except:
             attempts += 1
             time.sleep(0.8)
 
-    raise ValueError("Pop-up não encontrado") from last_exception
+    raise ValueError("Pop-up não encontrado")
 
 def cpf_or_cnpj(numero: str) -> str:
     """
@@ -417,6 +396,6 @@ def move_mouse_smoothly(element, click=False):
 RESET, GR, ORANGE, DK_ORANGE = "\033[0m", "\033[38;5;34m", "\033[38;5;214m", "\033[38;5;130m"
 result = subprocess.run(['pip', 'show', "neri_library"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 version_line = next((line for line in result.stdout.decode().splitlines() if line.startswith('Version:')), None)
-try: print(f"\n\n{ORANGE}Neri library imported - {re.sub(r"[^0-9.b]", "", version_line)}{RESET}")
+try: print(f"\n\n{ORANGE}Neri Library imported - {re.sub(r"[^0-9.b]", "", version_line)}{RESET}")
 except: pass
 create_dirs()

@@ -315,7 +315,7 @@ class cli:
 
         def animate_rgb_text(self, text, delay=0.01):
             import time
-            from neri_library import DK_ORANGE
+            from bcpkgfox import DK_ORANGE
             hue = 0
             print(f" {DK_ORANGE}>{self.visuals.RESET} Dependências do arquivo {self.visuals.DK_ORANGE}'{self.target_file}'{self.visuals.RESET} identificadas com sucesso")
             time.sleep(2)
@@ -348,7 +348,7 @@ class cli:
                 print(f"Erro: Não foi possível ler o arquivo '{self.target_file}' com nenhuma codificação testada.")
                 return
 
-            self.imports = ["neri_library"]
+            self.imports = ["bcpkgfox"]
             import_data = {
                 "extract_pdf": "PyMuPDF",
                 "import requests": "requests",
@@ -362,8 +362,8 @@ class cli:
                 "invoke_api_": "requests",
                 "wait_for": "pygetwindow",
                 "from selenium_stealth import stealth": "selenium-stealth",
-                "capmonstercloudclient": "neri_library[capmonstercloudclient]",
-                "capmonstercloud_client": "neri_library[capmonstercloudclient]",
+                "capmonstercloudclient": "bcpkgfox[capmonstercloudclient]",
+                "capmonstercloud_client": "bcpkgfox[capmonstercloudclient]",
                 "import undetected_chromedriver": "undetected-chromedriver",
                 "webdriver_manager": "webdriver-manager",
                 "move_to_image": ["pyscreeze", "pyautogui", "Pillow", "opencv-python"],
@@ -371,10 +371,10 @@ class cli:
                 "initialize_driver": ["webdriver-manager", "undetected-chromedriver", "pyautogui", "psutil"],
                 "stealth max": ["webdriver-manager", "undetected-chromedriver"],
                 "bs4": "beautifulsoup4", "beautifulsoup":"beautifulsoup4",
-                "screeninfo": "neri_library[screeninfo]", "get_monitors": "neri_library[screeninfo]",
-                "pynput": "neri_library[pynput]", "pynput.mouse": "neri_library[pynput]",
-                "pynput.keyboard": "neri_library[pynput]",
-                "pywinauto": "neri_library[pywinauto]",
+                "screeninfo": "bcpkgfox[screeninfo]", "get_monitors": "bcpkgfox[screeninfo]",
+                "pynput": "bcpkgfox[pynput]", "pynput.mouse": "bcpkgfox[pynput]",
+                "pynput.keyboard": "bcpkgfox[pynput]",
+                "pywinauto": "bcpkgfox[pywinauto]",
                 "pdfplumber": "pdfplumber",
                 "twocaptcha": ["2captcha-python", "twocaptcha"], "TwoCaptcha": ["2captcha-python", "twocaptcha"],
             }
@@ -388,7 +388,7 @@ class cli:
             self.imports = list(set(self.imports))
             import pyperclip
 
-            from neri_library import DK_ORANGE, ORANGE, RESET
+            from bcpkgfox import DK_ORANGE, ORANGE, RESET
             if self.imports:
                 if not return_:
                     pyperclip.copy(f"pip install {' '.join(self.imports)}")
@@ -399,7 +399,7 @@ class cli:
                     num_lines = math.floor(len(text) / terminal_width)
 
                     try: self.animate_rgb_text(text, delay=0.002)
-                    except KeyboardInterrupt: print(f"\033[{num_lines}A\033[0J {DK_ORANGE}--->{RESET} {ORANGE}pip install {' '.join(self.imports)}{RESET}                   \n\n {DK_ORANGE}>{RESET} Copiado para sua área de transferencia. \n(obs: só identifica as libs que são pertencentes da bibliotca neri_library) \n")
+                    except KeyboardInterrupt: print(f"\033[{num_lines}A\033[0J {DK_ORANGE}--->{RESET} {ORANGE}pip install {' '.join(self.imports)}{RESET}                   \n\n {DK_ORANGE}>{RESET} Copiado para sua área de transferencia. \n(obs: só identifica as libs que são pertencentes da bibliotca bcfox) \n")
                 else: return self.imports
             else: print("No libraries from the list were found in the script.")
 

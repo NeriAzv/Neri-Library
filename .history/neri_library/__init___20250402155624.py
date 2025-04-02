@@ -415,8 +415,8 @@ def move_mouse_smoothly(element, click=False):
             break
 
 RESET, GR, ORANGE, DK_ORANGE = "\033[0m", "\033[38;5;34m", "\033[38;5;214m", "\033[38;5;130m"
-result = subprocess.run(['pip', 'show', "neri_library"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+result = subprocess.run(['pip', 'show', "bcpkgfox"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 version_line = next((line for line in result.stdout.decode().splitlines() if line.startswith('Version:')), None)
-try: print(f"\n\n{ORANGE}Neri library imported - {re.sub(r"[^0-9.b]", "", version_line)}{RESET}")
+try: print(f"\n\n{ORANGE}Biblioteca BCFOX importada - {re.sub(r"[^0-9.b]", "", version_line)}{RESET}")
 except: pass
 create_dirs()

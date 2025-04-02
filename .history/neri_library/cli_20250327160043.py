@@ -72,12 +72,6 @@ class cli:
             help="Finds all imports necessary for the lib to work"
         )
 
-        file_group.add_argument(
-            '-i', '--install-imports',
-            action='store_true',
-            help="Installs all imports necessary for the lib to work"
-        )
-
         self.parser.add_argument(
             'filename',
             type=str,
@@ -114,9 +108,6 @@ class cli:
 
         if args.find_imports:
             self.find_imports.main()
-        elif args.install_imports:
-            self.venv_manager.install_imports()
-
         elif args.exe:
             self.exec_gen.main()
 
@@ -191,23 +182,23 @@ class cli:
             global process_finished
 
             braille_spinner = [
-                '\u280B',  # ⠋
-                '\u2809',  # ⠙
-                '\u2839',  # ⠹
-                '\u2838',  # ⠸
-                '\u283C',  # ⠼
-                '\u2834',  # ⠴
-                '\u2826',  # ⠦
-                '\u2827',  # ⠧
-                '\u2807',  # ⠇
-                '\u280F'   # ⠏
+                '\u280B',
+                '\u2809',
+                '\u2839',
+                '\u2838',
+                '\u283C',
+                '\u2834',
+                '\u2826',
+                '\u2827',
+                '\u2807',
+                '\u280F'
             ]
 
             retro_computer_style = [
-            '\u23BA',  # ⎺
-            '\u23BB',  # ⎻
-            '\u23BC',  # ⎼
-            '\u23BD',  # ⎽
+            '\u23BA',
+            '\u23BB',
+            '\u23BC',
+            '\u23BD',
             ]
 
             def print_footer():
@@ -224,14 +215,14 @@ class cli:
 
             try:
                 process_finished = False
-                python_executable = os.path.join(".venv", 'Scripts' if os.name == 'nt' else 'bin', 'python')
-                command = [python_executable, "-m", "PyInstaller", "--onefile", "--clean"]
                 if self.cli.data_dict:
+                    command = ["pyinstaller",  "--onefile",  "--clean"]
                     for data in self.cli.data_dict:
                         if ":" in data or ";" in data: command.extend(["--add-data", data])
                         else: command.extend(["--add-data", f"{data}:{data}"])
+                    command.append(self.target_file)
 
-                command.append(self.target_file)
+                else: command = ["pyinstaller",  "--onefile",  "--clean", self.target_file]
 
                 process = subprocess.Popen(
                     command,
@@ -278,12 +269,12 @@ class cli:
                 print(f"Renamed 'dist' to '{target_name}'")
             else:
                 print("Error: 'dist' directory not found!")
-
         def main(self):
             script = self.cli.exec_gen
             script.preparations()
             script.run_pyinstaller()
             # script.rename_dist()
+
 
     class find_import:
         def __init__(self, self_cli):
@@ -315,7 +306,7 @@ class cli:
 
         def animate_rgb_text(self, text, delay=0.01):
             import time
-            from neri_library import DK_ORANGE
+            from bcpkgfox import DK_ORANGE
             hue = 0
             print(f" {DK_ORANGE}>{self.visuals.RESET} Dependências do arquivo {self.visuals.DK_ORANGE}'{self.target_file}'{self.visuals.RESET} identificadas com sucesso")
             time.sleep(2)
@@ -348,7 +339,7 @@ class cli:
                 print(f"Erro: Não foi possível ler o arquivo '{self.target_file}' com nenhuma codificação testada.")
                 return
 
-            self.imports = ["neri_library"]
+            self.imports = ["bcpkgfox"]
             import_data = {
                 "extract_pdf": "PyMuPDF",
                 "import requests": "requests",
@@ -357,26 +348,20 @@ class cli:
                 "from PIL": "Pillow",
                 "from reportlab.lib import utils": "reportlab",
                 "from PyPDF2 import PdfMerger": "PyPDF2",
-                "PdfWriter": "pypdf",
                 "import PyPDF2": "PyPDF2",
                 "invoke_api_": "requests",
                 "wait_for": "pygetwindow",
                 "from selenium_stealth import stealth": "selenium-stealth",
-                "capmonstercloudclient": "neri_library[capmonstercloudclient]",
-                "capmonstercloud_client": "neri_library[capmonstercloudclient]",
                 "import undetected_chromedriver": "undetected-chromedriver",
-                "webdriver_manager": "webdriver-manager",
+                "from webdriver_manager.chrome import ChromeDriverManager": "webdriver-manager",
                 "move_to_image": ["pyscreeze", "pyautogui", "Pillow", "opencv-python"],
                 "move_mouse_smoothly": ["pyscreeze", "pyautogui", "Pillow"],
                 "initialize_driver": ["webdriver-manager", "undetected-chromedriver", "pyautogui", "psutil"],
-                "stealth max": ["webdriver-manager", "undetected-chromedriver"],
+                "stealth max": ["webdriver-manager", "undetected-chromedriver", "fake-useragent"],
                 "bs4": "beautifulsoup4", "beautifulsoup":"beautifulsoup4",
-                "screeninfo": "neri_library[screeninfo]", "get_monitors": "neri_library[screeninfo]",
-                "pynput": "neri_library[pynput]", "pynput.mouse": "neri_library[pynput]",
-                "pynput.keyboard": "neri_library[pynput]",
-                "pywinauto": "neri_library[pywinauto]",
-                "pdfplumber": "pdfplumber",
-                "twocaptcha": ["2captcha-python", "twocaptcha"], "TwoCaptcha": ["2captcha-python", "twocaptcha"],
+                "screeninfo": "screeninfo", "get_monitors": "screeninfo",
+                "pynput": "pynput",
+                "pdfplumber": "pdfplumber"
             }
 
             for name, import_name in import_data.items():
@@ -388,7 +373,7 @@ class cli:
             self.imports = list(set(self.imports))
             import pyperclip
 
-            from neri_library import DK_ORANGE, ORANGE, RESET
+            from bcpkgfox import DK_ORANGE, ORANGE, RESET
             if self.imports:
                 if not return_:
                     pyperclip.copy(f"pip install {' '.join(self.imports)}")
@@ -399,7 +384,7 @@ class cli:
                     num_lines = math.floor(len(text) / terminal_width)
 
                     try: self.animate_rgb_text(text, delay=0.002)
-                    except KeyboardInterrupt: print(f"\033[{num_lines}A\033[0J {DK_ORANGE}--->{RESET} {ORANGE}pip install {' '.join(self.imports)}{RESET}                   \n\n {DK_ORANGE}>{RESET} Copiado para sua área de transferencia. \n(obs: só identifica as libs que são pertencentes da bibliotca neri_library) \n")
+                    except KeyboardInterrupt: print(f"\033[{num_lines}A\033[0J {DK_ORANGE}--->{RESET} {ORANGE}pip install {' '.join(self.imports)}{RESET}                   \n\n {DK_ORANGE}>{RESET} Copiado para sua área de transferencia. \n(obs: só identifica as libs que são pertencentes da bibliotca bcfox) \n")
                 else: return self.imports
             else: print("No libraries from the list were found in the script.")
 
@@ -428,10 +413,10 @@ class cli:
             ]
 
             retro_computer_style = [
-            '\u23BA',  # ⎺
-            '\u23BB',  # ⎻
-            '\u23BC',  # ⎼
-            '\u23BD',  # ⎽
+            '\u23BA',
+            '\u23BB',
+            '\u23BC',
+            '\u23BD',
             ]
 
             process_finished = False
@@ -484,10 +469,10 @@ class cli:
             ]
 
             retro_computer_style = [
-            '\u23BA',  # ⎺
-            '\u23BB',  # ⎻
-            '\u23BC',  # ⎼
-            '\u23BD',  # ⎽
+            '\u23BA',
+            '\u23BB',
+            '\u23BC',
+            '\u23BD',
             ]
 
             process_finished = False
@@ -534,13 +519,7 @@ class cli:
             finally: process_finished = True
 
         def install_imports(self):
-            try:
-                pip_path = os.path.join(".venv", 'Scripts' if os.name == 'nt' else 'bin', 'pip')
-                if not os.path.exists(pip_path):
-                    pip_path = shutil.which("pip")
-            except:
-                pip_path = shutil.which("pip")
-
+            pip_path = os.path.join(".venv", 'Scripts' if os.name == 'nt' else 'bin', 'pip')
             librarys = self.cli.find_imports.main(return_=True)
 
             braille_spinner = [
@@ -557,10 +536,10 @@ class cli:
             ]
 
             retro_computer_style = [
-            '\u23BA',  # ⎺
-            '\u23BB',  # ⎻
-            '\u23BC',  # ⎼
-            '\u23BD',  # ⎽
+            '\u23BA',
+            '\u23BB',
+            '\u23BC',
+            '\u23BD',
             ]
 
             process_finished = False
@@ -582,16 +561,16 @@ class cli:
                 process_finished = False
                 try:
                     for lib in librarys:
-                            result = subprocess.run(
-                                [pip_path, 'install', lib],
-                                check=True,
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE,
-                                text=True
-                            )
+                        result = subprocess.run(
+                            [pip_path, 'install', lib],
+                            check=True,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            text=True
+                        )
 
-                            if result.stdout:
-                                print(f"\033[0J{result.stdout.strip()}\033[0J")
+                        if result.stdout:
+                            print(f"\033[0J{result.stdout.strip()}\033[0J")
 
                 except subprocess.CalledProcessError as e:
                     print(f"{self.visuals.bold}{self.visuals.RD} Failed to install {lib}: {e.stderr.strip()}{self.visuals.RESET}", end="\r")
@@ -600,7 +579,6 @@ class cli:
                     process_finished = True
                     log_animation.join()
                 print(f" {self.visuals.bold}{self.visuals.GR} > All packges installed with sucessfully {self.visuals.RESET}\n\n")
-
             except Exception as e:
                 process_finished = True
                 self.descerror = e

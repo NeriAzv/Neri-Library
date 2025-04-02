@@ -1,15 +1,15 @@
 """
-**_NERI_LIBRARY - DOC_**
+**_LIB BCFOX - DOC_**
 
 Args:
-    *DRIVER*: To use the driver service, initialize its class as in the example below. All explanations of the options are there.
-        - driver_class = neri_library.Instancedriver()
+    *DRIVER*: Para utitlizar o servico do _driver_ inicie a classe dele como no exemplo abaixo, todas as explicações das opções estão lá.
+        - driver_class = bcpkgfox.Instancedriver()
 
-    _SYSTEM_: If you want to extract PDFs, create folders, display message boxes, among other system services, use the command below **directly**.
-        - neri_library.System.{def}
+    _SYSTEM_: Caso queira extrair PDF's, criar pastas, mostrar mensagens_box entre outros serviços do systema utilize o comando abaixo **diretamente**.
+        - bcpkgfox.System.{def}
 
-    _API_: To use APIs, use the command below, **directly**
-        - neri_library.invoke_api.{def}
+    _API_: Utilização de api's use o comando abaixo, **diretamente**
+        - bcpkgfox.invoke_api.{def}
 
 """
 
@@ -225,21 +225,22 @@ def wait_for_element_disappear(object, type, timeout=10):
 
     return find_elements.backcode__dont_use__wait_for_d(driver, object, type, timeout=tempo)
 
-def nr_select(element, method, key):
+def selectfox(elemento, method, key):
     """
-    Selects an option in a <select> element.
+    Seleciona uma opção em um elemento <select>.
 
-    Args:
-        element: The <select> element found by Selenium.
-        method: Selection method ('index', 'text', or 'value').
-        key: Value used for selection (index, visible text, or 'value' attribute).
+    - Parâmetros:
+        - elemento: Elemento <select> encontrado pelo Selenium.
+        - method: Método de seleção ('index', 'text' ou 'value').
+        - key: Valor usado na seleção (índice, texto visível ou valor do atributo 'value').
 
-    Example:
-        select_element = neri_library.find_element_with_wait("xpath", '//select[@value="FIRST_SELECT_VALUE"]')
+    - Exemplo:
+        elemento_select = bc.find_element_with_wait("xpath", '//select[@value="VALUE_DO_PRIMEIRO_SELECT"]')
 
-        first_option = nr_select(select_element, "text", "FIRST SELECT TEXT")
-        first_option = nr_select(select_element, "value", "FIRST_SELECT_VALUE")
-        first_option = nr_select(select_element, "index", "0")
+        primeira_option = selectfox(elemento_select, "text", "TEXTO DO PRIMEIRO SELECT")
+        primeira_option = selectfox(elemento_select, "value", "VALUE_DO_PRIMEIRO_SELECT")
+        primeira_option = selectfox(elemento_select, "index", "0")
+
     """
 
     variations = {
@@ -256,12 +257,12 @@ def nr_select(element, method, key):
     else:
         raise ValueError(f"Método '{method}' não é válido. Escolha entre 'index', 'text' ou 'value'.")
 
-    select = Select(element)
+    select = Select(elemento)
     if method == "value":
         select.select_by_value(key)
 
     if method == "text":
-        elements = WebDriverWait(element, 10).until(EC.visibility_of_all_elements_located((By.XPATH, '//option')))
+        elements = WebDriverWait(elemento, 10).until(EC.visibility_of_all_elements_located((By.XPATH, '//option')))
         for elm in elements:
             if key.lower().strip() in elm.text.lower().strip():
                 select.select_by_visible_text(elm.text)
@@ -278,7 +279,7 @@ def pop_up_extract(text: bool = False, accept: bool = False, timeout: int = 10, 
         Chame a função e registrando ela em uma variável, and if you iniciate a driver without the library pass the driver variable.
 
     - Exemplo:
-        text = nr.pop_up_extract(text:True, accept:True, timeout=5)
+        text = bc.pop_up_extract(text:True, accept:True, timeout=5)
 
     - OBS: Para uma espera infinit (até o elemento aparecer) coloque timeout = 0
     """
@@ -415,8 +416,8 @@ def move_mouse_smoothly(element, click=False):
             break
 
 RESET, GR, ORANGE, DK_ORANGE = "\033[0m", "\033[38;5;34m", "\033[38;5;214m", "\033[38;5;130m"
-result = subprocess.run(['pip', 'show', "neri_library"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+result = subprocess.run(['pip', 'show', "bcpkgfox"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 version_line = next((line for line in result.stdout.decode().splitlines() if line.startswith('Version:')), None)
-try: print(f"\n\n{ORANGE}Neri library imported - {re.sub(r"[^0-9.b]", "", version_line)}{RESET}")
+try: print(f"\n\n{ORANGE}Biblioteca BCFOX importada - {re.sub(r"[^0-9.b]", "", version_line)}{RESET}")
 except: pass
 create_dirs()
