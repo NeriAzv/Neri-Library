@@ -1,0 +1,24 @@
+.. Neri Library documentation master file, created by
+   sphinx-quickstart on Tue Apr 30 2024.
+
+Bem-vindo à Neri Library!
+=========================
+
+Esta é a documentação oficial da **Neri Library**, uma biblioteca Python avançada para automação de tarefas, interação com navegadores, manipulação de APIs e muito mais.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Conteúdo:
+
+   introducao
+   driver
+   api
+   system
+   elementos
+   cli
+
+Indices and tables
+==================
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
