@@ -4,8 +4,8 @@ setup(
     name="neri_library",
     version="0.2.6",
     author="Guilherme Neri",
-    author_email="guilherme.neri@bcfox.com.br",
-    description="Biblioteca BCFOX",
+    author_email="gui.neriaz@gmail.com",
+    description="Neri library",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/NeriAzv/Neri-Library",
@@ -48,6 +48,9 @@ setup(
         ],
         "capmonstercloudclient":[
             'capmonstercloudclient',
+        ],
+        "twocaptcha":[
+            "2captcha-python",
         ],
         "full": [
             'undetected-chromedriver',

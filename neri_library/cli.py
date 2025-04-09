@@ -191,23 +191,23 @@ class cli:
             global process_finished
 
             braille_spinner = [
-                '\u280B',  # ⠋
-                '\u2809',  # ⠙
-                '\u2839',  # ⠹
-                '\u2838',  # ⠸
-                '\u283C',  # ⠼
-                '\u2834',  # ⠴
-                '\u2826',  # ⠦
-                '\u2827',  # ⠧
-                '\u2807',  # ⠇
-                '\u280F'   # ⠏
+                '\u280B',
+                '\u2809',
+                '\u2839',
+                '\u2838',
+                '\u283C',
+                '\u2834',
+                '\u2826',
+                '\u2827',
+                '\u2807',
+                '\u280F'
             ]
 
             retro_computer_style = [
-            '\u23BA',  # ⎺
-            '\u23BB',  # ⎻
-            '\u23BC',  # ⎼
-            '\u23BD',  # ⎽
+            '\u23BA',
+            '\u23BB',
+            '\u23BC',
+            '\u23BD',
             ]
 
             def print_footer():
@@ -354,6 +354,7 @@ class cli:
                 "import requests": "requests",
                 "import pyautogui": "pyautogui",
                 "import cv2": "opencv-python",
+                "fitz": "PyMuPDF",
                 "from PIL": "Pillow",
                 "from reportlab.lib import utils": "reportlab",
                 "from PyPDF2 import PdfMerger": "PyPDF2",
@@ -534,13 +535,7 @@ class cli:
             finally: process_finished = True
 
         def install_imports(self):
-            try:
-                pip_path = os.path.join(".venv", 'Scripts' if os.name == 'nt' else 'bin', 'pip')
-                if not os.path.exists(pip_path):
-                    pip_path = shutil.which("pip")
-            except:
-                pip_path = shutil.which("pip")
-
+            pip_path = os.path.join(".venv", 'Scripts' if os.name == 'nt' else 'bin', 'pip')
             librarys = self.cli.find_imports.main(return_=True)
 
             braille_spinner = [
