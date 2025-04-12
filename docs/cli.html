@@ -37,35 +37,39 @@
 <h1>Advanced CLI Toolchain<a class="headerlink" href="#advanced-cli-toolchain" title="Link to this heading">¶</a></h1>
 <section id="core-functionality">
 <h2>Core Functionality<a class="headerlink" href="#core-functionality" title="Link to this heading">¶</a></h2>
-<p>The Neri CLI module provides enterprise-grade automation for Python environment management and application deployment, demonstrating advanced system integration capabilities.</p>
+<p>The CLI module delivers production-ready automation for Python environment management and application deployment, showcasing enterprise-grade system integration capabilities.</p>
 </section>
 <section id="technical-highlights">
 <h2>Technical Highlights<a class="headerlink" href="#technical-highlights" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Cross-platform virtual environment control</strong> (destructive rebuilds with <code class="docutils literal notranslate"><span class="pre">-v</span></code> flag)</p></li>
-<li><p><strong>Smart dependency resolution</strong> (including hidden imports via <code class="docutils literal notranslate"><span class="pre">-fi</span></code>)</p></li>
-<li><p><strong>Self-contained executable generation</strong> (PyInstaller integration via <code class="docutils literal notranslate"><span class="pre">-e</span></code>)</p></li>
-<li><p><strong>Automated package installation</strong> (dependency detection + install via <code class="docutils literal notranslate"><span class="pre">-i</span></code>)</p></li>
+<li><p><strong>Environment Management</strong>: Complete virtual environment control (destructive rebuild with automatic dependency installation via <code class="docutils literal notranslate"><span class="pre">-v/--venv</span></code>)</p></li>
+<li><p><strong>Dependency Analysis</strong>: Comprehensive import detection including hidden dependencies (<code class="docutils literal notranslate"><span class="pre">-fi/--find-imports</span></code>)</p></li>
+<li><p><strong>Executable Packaging</strong>: Single-file standalone executable generation with PyInstaller integration (<code class="docutils literal notranslate"><span class="pre">-e/--exe</span></code>)</p></li>
+<li><p><strong>Automated Deployment</strong>: End-to-end dependency resolution and installation (<code class="docutils literal notranslate"><span class="pre">-i/--install-imports</span></code>)</p></li>
+<li><p><strong>Interactive Help</strong>: Complete feature documentation (<code class="docutils literal notranslate"><span class="pre">-h/--help</span></code>)</p></li>
 </ul>
 </section>
 <section id="command-reference">
 <h2>Command Reference<a class="headerlink" href="#command-reference" title="Link to this heading">¶</a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>nr          : Base command
-nr -e       : Generate Windows .exe with embedded dependencies
-nr -fi      : Advanced import detection
-nr -i       : Install detected requirements
-nr -v       : Rebuild virtual environment
-nr -h       : Display full command reference
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>nr            Initialize toolchain
+nr -e  {file.py}                  Generate Windows executable with embedded environment
+nr -fi {file.py}                  Detect all required imports
+nr -i  {file.py}                  Install detected dependencies
+nr -v                             Rebuild virtual environment with current requirements
+nr -v -ad {folders} -e {file.py}: Combine commands to run all operations together
+nr -h                             Display complete command reference
 </pre></div>
 </div>
 </section>
 <section id="implementation-notes">
 <h2>Implementation Notes<a class="headerlink" href="#implementation-notes" title="Link to this heading">¶</a></h2>
-<p>This toolchain demonstrates:
-1. Complex argument parsing architectures
-2. Subprocess management best practices
-3. Cross-platform compatibility layers
-4. Production-grade error handling</p>
+<p>Demonstrated technical competencies:
+- The .exe (‘nr -e’) is self-contained and requires neither Python nor external dependencies
+- Advanced argument parsing architectures
+- Cross-platform subprocess management
+- Environment isolation techniques
+- Production-grade error handling
+- Automated dependency resolution</p>
 </section>
 </section>
 
